@@ -7,10 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,10 +27,12 @@ class MainActivity : AppCompatActivity() {
         setContent {
             MaterialTheme {
                 Column(modifier = Modifier.fillMaxHeight()) {
+                    SampleToolBar()
                     Greeting(name = "Android")
                     InputText(name = getString(R.string.app_name))
                     SimpleRecyclerView()
                     ComplexRecyclerView()
+
                 }
             }
 
@@ -57,7 +56,8 @@ class MainActivity : AppCompatActivity() {
         TextField(
             value = textState.value,
             onValueChange = { textState.value = it },
-            placeholder = { Text(text = name) }
+            placeholder = { Text(text = name) },
+            maxLines = 2,
         )
     }
 
@@ -111,5 +111,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*Adding a toolbar using JetPack*/
+    @Composable
+    fun SampleToolBar() {
+        TopAppBar(backgroundColor = Color.Red) {
+            Row(modifier = Modifier.padding(5.dp)) {
+                Text(text = getString(R.string.app_name))
+            }
+        }
+    }
 
 }
